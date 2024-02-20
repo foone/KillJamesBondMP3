@@ -1,7 +1,9 @@
 import json,shutil,glob,os,re
 import eyed3
+OUTPUT_FOLDER = 'KJB mp3s'
+
 try:
-	os.mkdir('mp3')
+	os.mkdir(OUTPUT_FOLDER)
 except OSError:
 	pass
 
@@ -70,7 +72,7 @@ def apply_id3(path, info, attrib):
 	audiofile.initTag()
 	kjb="Kill James Bond!"
 	audiofile.tag.artist = kjb
-	audiofile.tag.album = '{} Season {}'.format(kjb,info['S'])
+	audiofile.tag.album = 'KJB S{}'.format(info['S'])
 	audiofile.tag.album_artist = kjb
 	audiofile.tag.title = info['full_name']
 	audiofile.tag.track_num = track_number_to_integer(info['E'])
@@ -97,7 +99,7 @@ for jsonfile in glob.glob('*.json'):
 						print('Wrong number of mp3s! {}'.format(mp3s))
 					else:
 						mp3file=mp3s[0]
-						outpath=os.path.join('mp3',info['out_filename'])
+						outpath=os.path.join(OUTPUT_FOLDER,info['out_filename'])
 						shutil.copy2(mp3file,outpath)
 						apply_id3(outpath,info,attrib)
 				else:

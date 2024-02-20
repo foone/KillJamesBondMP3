@@ -13,7 +13,7 @@
  3. Copy name.py into the download directory (download/Kill James Bond!)
  4. Switch to the download directory and run name.py:
   ```python3 name.py```
- 5. The files will now be in the mp3 subfolder. They will now have more reasonable filenames and id3 tags.
+ 5. The files will now be in the "kjb mp3s" subfolder. They will now have more reasonable filenames and id3 tags.
 
 # Notes
  This script has to apply some manual fixes for some mistakes or odd decisions done by the KJB team (such as there being two S2E2 episodes). 
