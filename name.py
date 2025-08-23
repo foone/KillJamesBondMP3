@@ -17,7 +17,8 @@ def parse_name(filename):
 	m=re.search(r'^S(\d+)E([0-9.]+)',filename)
 	S=E=None
 	if m:
-		S,E=m.groups(1)
+		# remove trailing dots
+		S,E=[x.rstrip('.') for x in m.groups(1)]
 	else:
 		m=re.search(r'^Episode ([0-9.]+)',filename)
 		if m:
@@ -39,10 +40,14 @@ def parse_name(filename):
 			m=re.search('^Episode ([0-9.]+)(.*)',rest)
 			if m:
 				rest=m.group(2).strip().strip('-').strip()
+			else:
+				m=re.search(r'^S(\d+)E([0-9.]+)(.+)$',rest)
+				if m:
+					rest=m.group(3).strip().strip('-').strip()
 		else:
 			prefix,rest=parts
 		rest=rest.strip()
-		rest=rest.replace('/','_').replace(':','')
+		rest=rest.replace('/','_').replace('?','').replace(':','')
 		if 'Agent Secret FX-18' in rest:
 			# They misnamed this file, so we have to fix it
 			S='3'
